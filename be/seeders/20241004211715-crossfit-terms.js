@@ -210,6 +210,109 @@ module.exports = {
 			{ term: 'Weighted Pull-ups', definition: 'подтягивания с отягощением' },
 			{ term: 'Weighted Push-ups', definition: 'отжимания с отягощением' },
 			{ term: 'Z-Press', definition: 'жим над головой сидя' },
+			{
+				term: 'AMRAP (As Many Rounds As Possible)',
+				description: 'якнайбільше раундів за певний час.',
+			},
+			{ term: 'Box Jump', description: 'стрибок на ящик.' },
+			{
+				term: 'Burpee',
+				description:
+					'вправа, що складається зі стрибка, присідання та віджимання.',
+			},
+			{ term: 'CF (CrossFit)', description: 'кросфіт.' },
+			{
+				term: 'Chipper',
+				description:
+					'тренування, що складається з кількох вправ, виконуваних по одному разу.',
+			},
+			{ term: 'Clean', description: 'підйом штанги від підлоги до плечей.' },
+			{ term: 'Deadlift', description: 'становий підйом.' },
+			{
+				term: 'Double Under',
+				description: 'два оберти скакалки за один стрибок.',
+			},
+			{
+				term: 'EMOM (Every Minute on the Minute)',
+				description: 'кожну хвилину виконувати вправу.',
+			},
+			{
+				term: 'Farmer’s Walk',
+				description: 'ходьба з важкими вагами в руках.',
+			},
+			{
+				term: 'Frankenstein',
+				description: 'вправа, що поєднує присідання та жим штанги.',
+			},
+			{
+				term: 'GHD (Glute Ham Developer)',
+				description: 'тренажер для тренування сідничних м’язів та стегон.',
+			},
+			{
+				term: 'HSPU (Handstand Push-Up)',
+				description: 'віджимання в стійці на руках.',
+			},
+			{ term: 'Jerk', description: 'поштовх штанги над головою.' },
+			{ term: 'Kettlebell Swing', description: 'мах з гирею.' },
+			{ term: 'Lunge', description: 'випад.' },
+			{ term: 'MB (Medicine Ball)', description: 'лікарський м’яч.' },
+			{
+				term: 'Metcon (Metabolic Conditioning)',
+				description: 'метаболічне тренування для підвищення витривалості.',
+			},
+			{
+				term: 'OM (Overhead Squat)',
+				description: 'присідання з штангою над головою.',
+			},
+			{ term: 'Pistol', description: 'присідання на одній нозі.' },
+			{
+				term: 'RDL (Romanian Deadlift)',
+				description: 'румунська становая тяга.',
+			},
+			{ term: 'Rings', description: 'кільця для підтягувань.' },
+			{ term: 'RO (Rowing)', description: 'веслування.' },
+			{ term: 'RX (prescribed)', description: 'стандарт виконання вправи.' },
+			{
+				term: 'S2OH (Snatch to Overhead)',
+				description: 'ривок зі штангою над головою.',
+			},
+			{
+				term: 'Snatch',
+				description: 'ривок, підйом штанги над головою в один рух.',
+			},
+			{ term: 'Squat', description: 'присідання.' },
+			{ term: 'SS (Single-Squats)', description: 'присідання на одній нозі.' },
+			{ term: 'Ski Erg', description: 'тренажер для схожості рухів на лижах.' },
+			{ term: 'Sled Push', description: 'поштовх коляски.' },
+			{ term: 'Strength', description: 'сила.' },
+			{ term: 'Strict Pull-ups', description: 'підтягування без підкачки.' },
+			{
+				term: 'Tabata',
+				description:
+					'протокол високоінтенсивного інтервального тренування, що складається з 20 секунд роботи, 10 секунд відпочинку, повторюється 8 разів.',
+			},
+			{ term: 'Thruster', description: 'присідання з поштовхом.' },
+			{ term: 'Tire Flip', description: 'перевертач шини.' },
+			{ term: 'Toes to Bar', description: 'підйом ніг до перекладини.' },
+			{
+				term: 'Triple Under',
+				description: 'три оберти скакалки за один стрибок.',
+			},
+			{ term: 'T2B (Toes to Bar)', description: 'ніг до перекладини.' },
+			{ term: 'UB (Unbroken)', description: 'без перерви.' },
+			{
+				term: 'V-Ups',
+				description: 'підйом ніг та корпусу в положенні сидячи.',
+			},
+			{ term: 'WOD (Workout of the Day)', description: 'тренування дня.' },
+			{
+				term: 'Wall Ball',
+				description: 'вправа з м’ячем, що кидається у стіну.',
+			},
+			{ term: 'Wrist Wrap', description: 'обгортка для зап’ястя.' },
+			{ term: 'X-fit', description: 'кросфіт.' },
+			{ term: 'Yoke', description: 'переносна конструкція для ваги.' },
+			{ term: 'Zercher Squat', description: 'присідання в захваті.' },
 		]
 
 		await queryInterface.bulkInsert('CrossfitTerms', crossfitTerms)

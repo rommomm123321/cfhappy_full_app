@@ -69,13 +69,12 @@ export const WorkoutCard = ({
 		>
 			<CardActionArea>
 				<CardContent onClick={handleCardClick}>
-					<Typography gutterBottom variant='h5' component='div'>
+					<Typography gutterBottom variant='h5' component='div' color='primary'>
 						{dayjs(workout?.title).format('DD-MM-YYYY')}
 					</Typography>
 					<Box
 						variant='body2'
 						sx={{
-							color: 'text.secondary',
 							display: 'block',
 							maxHeight: '400px',
 							overflow: 'hidden',
@@ -96,7 +95,7 @@ export const WorkoutCard = ({
 				<CardActions
 					sx={{ justifyContent: 'flex-end', padding: '5px', marginTop: 'auto' }}
 				>
-					<Button onClick={handleCardClick}>
+					<Button onClick={handleCardClick} size='small'>
 						<Comment />
 						<Typography variant='body2' sx={{ marginLeft: '4px' }}>
 							{workout.comments.length}

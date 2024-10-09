@@ -384,6 +384,30 @@ const createOrder = async (req, res) => {
 	}
 }
 
+const sendFlyToTraining = async (req, res) => {
+	try {
+		const { name, phone } = req.body
+
+		if (!name || !phone) {
+			return res.status(400).json({ message: 'name and phone is required.' })
+		}
+
+		const message = `Нова реєстрація на тренування:\nІм'я: ${name}\nТелефон: ${phone}`
+
+		await bot.sendMessage(CHAT_ID, message, {
+			parse_mode: 'Markdown', // Use Markdown for formatting
+		})
+
+		res.status(201).json({
+			message:
+				'Успішно зареєстровано на тренування! Наш оператор незабаром зв’яжеться з вами.',
+		})
+	} catch (error) {
+		console.error('Error creating order:', error)
+		res.status(500).json({ message: 'Error creating order', error })
+	}
+}
+
 const calculateTotalPrice = orderItems => {
 	return orderItems.reduce((total, item) => total + item.price * item.count, 0)
 }
@@ -413,4 +437,5 @@ const formatOrderMessage = (orderData, status) => {
 
 module.exports = {
 	createOrder,
+	sendFlyToTraining,
 }

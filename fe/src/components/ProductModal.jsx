@@ -236,6 +236,7 @@ export const ProductModal = ({
 					<Grid2 container spacing={2} sx={{ marginTop: '10px' }}>
 						<Grid2 size={{ xs: 12 }}>
 							<TextField
+								size='small'
 								label='Назва товару'
 								variant='outlined'
 								fullWidth
@@ -245,6 +246,7 @@ export const ProductModal = ({
 						</Grid2>
 						<Grid2 size={{ xs: 12 }}>
 							<TextField
+								size='small'
 								label='Опис товару'
 								variant='outlined'
 								fullWidth
@@ -256,6 +258,7 @@ export const ProductModal = ({
 						</Grid2>
 						<Grid2 size={{ xs: 12 }}>
 							<TextField
+								size='small'
 								label='Ціна'
 								variant='outlined'
 								fullWidth
@@ -268,13 +271,24 @@ export const ProductModal = ({
 							<Autocomplete
 								fullWidth
 								multiple
+								slotProps={{
+									textField: {
+										fullWidth: true,
+										size: 'small',
+									},
+								}}
 								id='multiple-limit-tags'
 								options={availableSizes}
 								value={sizes.map(size => ({ title: size }))} // Отображение выбранных значений
 								onChange={handleSizeChange}
 								getOptionLabel={option => option.title}
 								renderInput={params => (
-									<TextField {...params} label='Розмір' placeholder='Розмір' />
+									<TextField
+										{...params}
+										label='Розмір'
+										placeholder='Розмір'
+										size='small'
+									/>
 								)}
 							/>
 						</Grid2>
@@ -288,7 +302,12 @@ export const ProductModal = ({
 								style={{ display: 'none' }}
 							/>
 							<label htmlFor='image-upload'>
-								<Button variant='contained' component='span' fullWidth>
+								<Button
+									variant='contained'
+									component='span'
+									fullWidth
+									size='small'
+								>
 									Додати фото
 								</Button>
 							</label>
@@ -337,11 +356,17 @@ export const ProductModal = ({
 												}} // Обновляем цвет
 												renderInput={params => (
 													<TextField
+														size='small'
 														{...params}
 														label='Колір'
 														placeholder='Оберіть колір'
 													/>
 												)}
+												slotProps={{
+													textField: {
+														size: 'small',
+													},
+												}}
 												renderOption={(props, option) => (
 													<Box
 														component='li'

@@ -50,6 +50,7 @@ export const SearchSection = ({ setQueryParams }) => {
 								value={searchText}
 								onChange={e => setSearchText(e.target.value)}
 								aria-label='Text Search for WODs'
+								size='small'
 							/>
 						</Grid2>
 						<Grid2 size={{ xs: 12, sm: 4, md: 4 }}>
@@ -58,6 +59,7 @@ export const SearchSection = ({ setQueryParams }) => {
 								slotProps={{
 									textField: {
 										fullWidth: true,
+										size: 'small',
 									},
 								}}
 								defaultValue={null}
@@ -65,6 +67,7 @@ export const SearchSection = ({ setQueryParams }) => {
 								onChange={newValue => setSelectedDate(newValue)}
 								renderInput={params => (
 									<TextField
+										size='small'
 										{...params}
 										fullWidth
 										variant='outlined'
@@ -81,6 +84,7 @@ export const SearchSection = ({ setQueryParams }) => {
 								startIcon={<SearchIcon />}
 								onClick={handleSearch}
 								aria-label='Search'
+								size='small'
 							>
 								Шукати
 							</Button>

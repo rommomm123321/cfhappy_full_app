@@ -5,6 +5,7 @@ import { useEffect } from 'react'
 import { getMe } from '../config/helpers'
 import { useLocation } from 'react-router-dom'
 import FloatingCartButton from './FloatingCartButton'
+import { RandomIconsBackground } from './RandomIconsBackground'
 
 // eslint-disable-next-line react/prop-types
 export const Layout = ({ children }) => {
@@ -16,20 +17,37 @@ export const Layout = ({ children }) => {
 		})()
 	}, [location])
 
-	function clearCart() {
-		localStorage.removeItem('cart')
-		console.log('Корзина очищена')
-	}
+	useEffect(() => {
+		const clearCart = () => {
+			localStorage.removeItem('cart')
+			console.log('Корзина очищена')
+		}
 
-	setInterval(clearCart, 3600000)
+		const clearDraft = () => {
+			localStorage.removeItem('draft_post')
+			localStorage.removeItem('draft_comment')
+		}
 
-	document.addEventListener('DOMContentLoaded', event => {
+		// Очищаем корзину и черновики сразу после загрузки страницы
 		clearCart()
-	})
+		clearDraft()
+
+		// Устанавливаем интервал для очистки раз в час
+		const intervalId = setInterval(() => {
+			clearCart()
+			clearDraft()
+			const event = new Event('cartUpdated') // Create a new event
+			window.dispatchEvent(event)
+		}, 3600000)
+
+		// Очищаем интервал при размонтировании компонента
+		return () => clearInterval(intervalId)
+	}, [])
 
 	return (
 		<Box>
 			<Header />
+			<RandomIconsBackground />
 			<Box>{children}</Box>
 			<Footer />
 			<FloatingCartButton />

@@ -141,8 +141,9 @@ export const Store = () => {
 				align='center'
 				gutterBottom
 				textTransform='uppercase'
+				fontWeight='bold'
 			>
-				Магазин Атрибутики
+				Мерч CrossFit Happy
 			</Typography>
 			<>
 				{getCurrentUser()?.role == 'coach' && (

@@ -88,6 +88,9 @@ export const Header = () => {
 
 						return (
 							<NavLink
+								onClick={() => {
+									window.scrollTo({ top: 0, behavior: 'smooth' })
+								}}
 								key={key}
 								to={item.path}
 								style={{

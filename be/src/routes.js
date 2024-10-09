@@ -23,7 +23,10 @@ const {
 	updateProduct,
 	deleteProduct,
 } = require('../controllers/productController')
-const { createOrder } = require('../controllers/orderController')
+const {
+	createOrder,
+	sendFlyToTraining,
+} = require('../controllers/orderController')
 
 const router = express.Router()
 
@@ -50,5 +53,5 @@ router.put('/products/:id', authenticateJWT, updateProduct)
 router.delete('/products/:id', authenticateJWT, deleteProduct)
 
 router.post('/order', createOrder)
-
+router.post('/fly-to-training', sendFlyToTraining)
 module.exports = router

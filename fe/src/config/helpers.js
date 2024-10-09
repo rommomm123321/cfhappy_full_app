@@ -171,6 +171,16 @@ export const sendOrder = async data => {
 	}
 }
 
+export const sendFlyToTrainingAsync = async data => {
+	try {
+		const res = await axiosInstance.post('/fly-to-training', data)
+		return res
+	} catch (error) {
+		console.error('Error sending content:', error)
+		throw error
+	}
+}
+
 export const getCurrentUser = () => {
 	const user = localStorage.getItem('user')
 	return user ? JSON.parse(user) : null

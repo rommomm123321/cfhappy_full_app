@@ -89,7 +89,7 @@ const FloatingCartButton = () => {
 					hideLoader()
 					setMessageType('success')
 					setMessage(
-						'Ваше замовлення успішно сформульовано! Скоро з вами зв’яжеться оператор.'
+						'Ваше замовлення успішно сформовано! Скоро з вами зв’яжеться оператор.'
 					)
 				}, 2000)
 			} catch (error) {
@@ -116,13 +116,36 @@ const FloatingCartButton = () => {
 		if (error && telegramAddress) {
 			setError(null)
 		}
-	}, [telegramAddress])
+	}, [telegramAddress, drawerOpen])
+
+	useEffect(() => {
+		setError(null)
+		setTelegramAddress('')
+	}, [drawerOpen])
+
+	// const drawerHeight = window.innerHeight - 70
+
+	// const [drawerHeight, setDrawerHeight] = useState('100vh')
+
+	// useEffect(() => {
+	// 	const handleResize = () => {
+	// 		// Логика для обновления высоты Drawer или его содержимого
+	// 		setDrawerHeight(window.innerHeight - 70) // Учитывая место для нижнего меню
+	// 	}
+
+	// 	window.addEventListener('resize', handleResize)
+	// 	handleResize() // Установите начальную высоту
+
+	// 	return () => {
+	// 		window.removeEventListener('resize', handleResize)
+	// 	}
+	// }, [])
 
 	return (
 		<>
 			{cartItemCount > 0 && ( // Условный рендеринг для отображения кнопки
 				<Fab
-					size='medium'
+					size='large'
 					color='success'
 					aria-label='cart'
 					onClick={() => setDrawerOpen(true)}
@@ -151,7 +174,10 @@ const FloatingCartButton = () => {
 						display: 'flex',
 						flexDirection: 'column',
 						backgroundColor: '#000000e3',
-						height: '100vh', // Устанавливаем высоту Drawer на 100%
+						height: {
+							xs: 'calc(100% - 70px)',
+							sm: '100%',
+						}, // Устанавливаем высоту Drawer на 100%
 					},
 				}}
 			>

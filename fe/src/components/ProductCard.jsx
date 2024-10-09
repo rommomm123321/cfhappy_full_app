@@ -130,17 +130,17 @@ const ProductCard = ({
 			</Swiper>
 
 			<CardContent sx={{ paddingBottom: '10px !important' }}>
-				<Typography gutterBottom variant='h6' component='div'>
+				<Typography gutterBottom variant='h6' component='div' color='primary'>
 					{product.name}
 				</Typography>
-				<Typography variant='body2' color='text.secondary' sx={{ mb: 2 }}>
+				<Typography variant='body2' color='' sx={{ mb: 2 }}>
 					{product.description}
 				</Typography>
 
 				{/* Список размеров */}
 
 				<Box sx={{ mb: 2 }}>
-					<Typography variant='caption' color='text.secondary' sx={{ mb: 1 }}>
+					<Typography variant='caption' color='textDisabled' sx={{ mb: 0.5 }}>
 						Розмір:
 					</Typography>
 					<Stack direction='row' spacing={1} sx={{ flexWrap: 'wrap' }}>
@@ -168,7 +168,7 @@ const ProductCard = ({
 
 				{/* Список цветов */}
 				<Box sx={{ mb: 2 }}>
-					<Typography variant='caption' color='text.secondary' sx={{ mb: 1 }}>
+					<Typography variant='caption' color='textDisabled' sx={{ mb: 1 }}>
 						Колір:
 					</Typography>
 					<Stack direction='row' spacing={1} sx={{ flexWrap: 'wrap' }}>
@@ -209,12 +209,12 @@ const ProductCard = ({
 					justifyContent='space-between'
 					alignItems='center'
 				>
-					<Typography variant='h6' color='success'>
+					<Typography variant='h7' color='success'>
 						₴{product.price}
 					</Typography>
 					<Box>
 						<IconButton
-							size='small'
+							size='large'
 							color={selectedSize && selectedColor ? 'success' : 'primary'}
 							aria-label='add to shopping cart'
 							onClick={() =>

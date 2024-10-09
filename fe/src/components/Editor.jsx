@@ -67,10 +67,53 @@ export const Editor = ({
 		}
 	}
 
+	useEffect(() => {
+		// Загружаем черновик из localStorage
+		const draftKey = isComment ? 'draft_comment' : 'draft_post'
+		const savedDraft = localStorage.getItem(draftKey)
+		if (savedDraft) {
+			setContent(savedDraft)
+		}
+
+		// Устанавливаем интервал для автоматической очистки черновиков
+		const intervalId = setInterval(() => {
+			localStorage.removeItem(draftKey) // Удаляем черновик раз в час
+			setContent('') // Очистка содержимого редактора
+		}, 3600000) // 1 час
+
+		return () => clearInterval(intervalId) // Очистка интервала при размонтировании компонента
+	}, [isComment])
+
+	useEffect(() => {
+		// Сохраняем черновик в localStorage при изменении содержимого
+		const draftKey = isComment ? 'draft_comment' : 'draft_post'
+		localStorage.setItem(draftKey, content)
+	}, [content, isComment])
+
 	const handleCancel = () => {
 		setContent('')
 		setIsEdit(false)
 	}
+
+	// const clearDraft = () => {
+	// 	localStorage.removeItem('draftContent')
+	// 	setContent('')
+	// }
+
+	// const saveDraft = () => {
+	// 	localStorage.setItem('draftContent', content)
+	// }
+
+	// useEffect(() => {
+	// 	const savedContent = localStorage.getItem('draftContent')
+	// 	if (savedContent) {
+	// 		setContent(savedContent)
+	// 	}
+	// }, [])
+
+	// useEffect(() => {
+	// 	saveDraft()
+	// }, [content])
 
 	useEffect(() => {
 		if (isEdit) setContent(editableData.content || '')

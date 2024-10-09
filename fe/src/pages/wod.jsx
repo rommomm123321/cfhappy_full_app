@@ -10,6 +10,7 @@ import {
 	Container,
 } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
+import { RandomIconsBackground } from '../components/RandomIconsBackground'
 
 export const Wod = () => {
 	const navigate = useNavigate()
@@ -494,7 +495,6 @@ export const Wod = () => {
 			}
 		>
 			{/* <UploadImageToS3WithReactS3 /> */}
-
 			<div className='inner-page page-news'>
 				<Box>
 					<Typography
@@ -502,6 +502,7 @@ export const Wod = () => {
 						align='center'
 						gutterBottom
 						textTransform='uppercase'
+						fontWeight='bold'
 					>
 						Термінологія CROSSFIT
 					</Typography>

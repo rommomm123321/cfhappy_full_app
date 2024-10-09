@@ -77,8 +77,9 @@ export const Map = () => {
 							padding='0px 5px'
 							sx={{ wordBreak: 'break-word' }}
 							align='center'
+							fontWeight='bold'
 						>
-							Інформація та Контакти
+							Як нас знайти
 						</Typography>
 
 						<MapContainer

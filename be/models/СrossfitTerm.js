@@ -3,11 +3,11 @@ module.exports = (sequelize, DataTypes) => {
 		term: {
 			type: DataTypes.STRING,
 			allowNull: false,
-			unique: true,
+			unique: false,
 		},
 		definition: {
 			type: DataTypes.TEXT,
-			allowNull: false,
+			allowNull: true,
 		},
 	})
 

@@ -71,6 +71,7 @@ export const AuthModal = ({ open, handleClose }) => {
 					</IconButton>
 					<Grid2 spacing={2} container sx={{ marginTop: '10px' }}>
 						<TextField
+							size='small'
 							label='Клікуха'
 							variant='outlined'
 							fullWidth
@@ -79,6 +80,7 @@ export const AuthModal = ({ open, handleClose }) => {
 							onChange={e => setName(e.target.value)}
 						/>
 						<TextField
+							size='small'
 							label='Ключ'
 							variant='outlined'
 							fullWidth
@@ -88,6 +90,7 @@ export const AuthModal = ({ open, handleClose }) => {
 						/>
 					</Grid2>
 					<Button
+						size='small'
 						variant='contained'
 						color='success'
 						onClick={handleSend}

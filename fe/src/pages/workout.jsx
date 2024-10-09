@@ -69,6 +69,7 @@ export const Workout = () => {
 				align='center'
 				gutterBottom
 				textTransform='uppercase'
+				fontWeight='bold'
 			>
 				База тренувань
 			</Typography>

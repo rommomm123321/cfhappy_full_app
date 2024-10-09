@@ -142,6 +142,7 @@ export const WorkoutDetails = () => {
 						component='div'
 						gutterBottom
 						sx={{ textTransform: 'uppercase' }}
+						color='primary'
 					>
 						ТРЕНУВАННЯ ДНЯ
 					</Typography>
@@ -168,6 +169,7 @@ export const WorkoutDetails = () => {
 								variant='body1'
 								component='div'
 								sx={{ textTransform: 'uppercase' }}
+								color='textDisabled'
 							>
 								Комментарі за {dayjs(data.date).format('DD-MM-YYYY')}
 							</Typography>
