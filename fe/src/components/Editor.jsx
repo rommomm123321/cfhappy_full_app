@@ -128,7 +128,6 @@ export const Editor = ({
 	const _REGION = process.env.REGION
 	const ACCESS_KEY_ID = process.env.ACCESS_KEY_ID
 	const SECRET_ACCESS_KEY = process.env.SECRET_ACCESS_KEY
-	console.log('_S3_BUCKET :>> ', _S3_BUCKET)
 
 	return (
 		<Box
@@ -165,42 +164,45 @@ export const Editor = ({
 					imageAllowedTypes: ['jpeg', 'jpg', 'png'],
 					events: {
 						'image.beforeUpload': async function (images) {
-							const config = {
-								bucketName: _S3_BUCKET,
-								region: _REGION,
-								accessKeyId: ACCESS_KEY_ID,
-								secretAccessKey: SECRET_ACCESS_KEY,
-							}
+							const data = new FormData()
+							data.append('image', images[0])
 
-							await uploadFile(images[0], config)
-								.then(res =>
-									this.image.insert(res.location, null, null, this.image.get())
-								)
-								.catch(err => console.error(err))
+							// const config = {
+							// 	bucketName: _S3_BUCKET,
+							// 	region: _REGION,
+							// 	accessKeyId: ACCESS_KEY_ID,
+							// 	secretAccessKey: SECRET_ACCESS_KEY,
+							// }
 
-							// axios
-							// 	.post(
-							// 		'https://api.imgbb.com/1/upload?expiration=600&key=c8a4ce4d7267fbf90d795a2f17b3c72c',
-							// 		data,
-							// 		{
-							// 			headers: {
-							// 				accept: 'application/json',
-							// 				'Accept-Language': 'en-US,en;q=0.8',
-							// 				'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
-							// 			},
-							// 		}
+							// await uploadFile(images[0], config)
+							// 	.then(res =>
+							// 		this.image.insert(res.location, null, null, this.image.get())
 							// 	)
-							// 	.then(res => {
-							// 		this.image.insert(
-							// 			res.data.data.url,
-							// 			null,
-							// 			null,
-							// 			this.image.get()
-							// 		)
-							// 	})
-							// 	.catch(err => {
-							// 		console.log(err)
-							// 	})
+							// 	.catch(err => console.error(err))
+
+							axios
+								.post(
+									'https://api.imgbb.com/1/upload?expiration=15552000&key=c8a4ce4d7267fbf90d795a2f17b3c72c',
+									data,
+									{
+										headers: {
+											accept: 'application/json',
+											'Accept-Language': 'en-US,en;q=0.8',
+											'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
+										},
+									}
+								)
+								.then(res => {
+									this.image.insert(
+										res.data.image.url,
+										null,
+										null,
+										this.image.get()
+									)
+								})
+								.catch(err => {
+									console.log(err)
+								})
 							return false
 						},
 					},

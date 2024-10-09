@@ -94,8 +94,23 @@ export const ProductModal = ({
 			data.append('image', file)
 			try {
 				setLoad(prev => !prev)
-				const response = await uploadFile(file, config)
-				uploadedImages.push({ url: response.location, color: '' })
+				// const response = await uploadFile(file, config)
+
+				const res = await axios.post(
+					'https://api.imgbb.com/1/upload?expiration=15552000&key=c8a4ce4d7267fbf90d795a2f17b3c72c',
+					data,
+					{
+						headers: {
+							accept: 'application/json',
+							'Accept-Language': 'en-US,en;q=0.8',
+							'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
+						},
+					}
+				)
+
+				uploadedImages.push({ url: res.data.data.image.url, color: '' })
+
+				// uploadedImages.push({ url: response.location, color: '' })
 			} catch (error) {
 				console.error('Error uploading image:', error)
 			}
@@ -291,7 +306,7 @@ export const ProductModal = ({
 
 									return (
 										<Box
-											key={index}
+											key={image.url}
 											sx={{
 												position: 'relative',
 												border: '1px solid #cccccc91',
@@ -330,6 +345,7 @@ export const ProductModal = ({
 												renderOption={(props, option) => (
 													<Box
 														component='li'
+														key={option.value}
 														{...props}
 														sx={{
 															display: 'flex',
@@ -397,6 +413,7 @@ export const ProductModal = ({
 						</Box>
 					) : (
 						<Button
+							id='added-product'
 							variant='contained'
 							color='success'
 							onClick={handleAddProduct}
