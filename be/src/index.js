@@ -13,11 +13,11 @@ app.use(express.json())
 
 app.use('/api', apiRoutes)
 
-app.use(express.static(path.join(__dirname, '../../fe/dist')))
+app.use(express.static(path.join(__dirname, '../public')))
 
 // Это маршрутизатор, который отправляет index.html для всех остальных маршрутов
 app.get('*', function (req, res) {
-	res.sendFile(path.join(__dirname, '../../fe/dist', 'index.html'))
+	res.sendFile(path.join(__dirname, '../public', 'index.html'))
 })
 
 app.listen(PORT, () => {

@@ -54,7 +54,7 @@ export const AuthModal = ({ open, handleClose }) => {
 						p: 4,
 						borderRadius: 2,
 						border: '1px solid #424242',
-						position: 'relative',
+						// position: 'relative',
 					}}
 				>
 					<IconButton

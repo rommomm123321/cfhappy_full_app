@@ -2,8 +2,9 @@ import { Box, Typography } from '@mui/material'
 import { motion, AnimatePresence } from 'framer-motion'
 
 import testVideo from '../assets/test_video_3.mp4'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useMatch } from 'react-router-dom'
+import { useLoader } from '../hooks/useLoader'
 
 const textArray = [
 	'Якщо штанга не падає на підлогу, отже, ти все робиш правильно!',
@@ -21,6 +22,9 @@ const textArray = [
 
 export const Home = () => {
 	const [index, setIndex] = useState(0)
+	const [isLoading, setIsLoading] = useState(true)
+	const videoRef = useRef(null)
+	const { showLoader, hideLoader } = useLoader()
 
 	useEffect(() => {
 		const interval = setInterval(() => {
@@ -30,17 +34,38 @@ export const Home = () => {
 		return () => clearInterval(interval)
 	}, [])
 
+	useEffect(() => {
+		if (videoRef.current) {
+			videoRef.current.muted = true
+			videoRef.current.play()
+		}
+	}, [videoRef])
+
+	const handleVideoLoadStart = () => {
+		setIsLoading(true)
+		showLoader()
+	}
+
+	const handleVideoCanPlay = () => {
+		setIsLoading(false)
+		hideLoader()
+	}
+
 	return (
 		<Box position='relative' width='100vw' height='100vh'>
 			<Box
+				ref={videoRef}
 				component='video'
 				width='100vw'
 				height='100vh'
 				loop
 				autoPlay
-				// muted
+				muted
+				playsInline
+				onWaiting={handleVideoLoadStart}
+				onCanPlay={handleVideoCanPlay}
 				style={{
-					objectFit: 'contain',
+					objectFit: 'cover',
 					position: 'absolute',
 					top: 0,
 					left: 0,
@@ -51,7 +76,7 @@ export const Home = () => {
 				Your browser does not support the video tag.
 			</Box>
 
-			<Box position='absolute' top='40%' left='10%' right='10%' zIndex={1}>
+			<Box position='absolute' top='35%' left='5%' right='10%' zIndex={1}>
 				<AnimatePresence>
 					<motion.div
 						key={index}

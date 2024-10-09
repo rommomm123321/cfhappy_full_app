@@ -220,7 +220,7 @@ const FloatingCartButton = () => {
 						color='warning'
 						onClick={handleClearCart}
 					>
-						Очистити корзину
+						Очистити кошик
 					</Button>
 				</Stack>
 			</Drawer>
