@@ -2,12 +2,16 @@ const { Op } = require('sequelize')
 const { Post, Comment, CrossfitTerm, AuthApiKey } = require('../models')
 
 function linkifyAndTooltipify(text, terms) {
+	const removeTagRegex = /<p[^>]*data-f-id="pbf"[^>]*>.*?<\/p>/gi
+
+	// Удаление найденных тегов
+	let cleanedText = text.replace(removeTagRegex, '')
 	const termRegex = new RegExp(
 		`\\b(${terms.map(term => term.term).join('|')})\\b`,
 		'g'
 	)
 
-	return text
+	cleanedText = cleanedText
 		.replace(termRegex, matched => {
 			const term = terms.find(t => t.term === matched)
 			if (term) {
@@ -22,6 +26,8 @@ function linkifyAndTooltipify(text, terms) {
 		.replace(/\n/g, ' ')
 		.replace(/\s+/g, ' ')
 		.trim()
+
+	return cleanedText
 }
 
 // Create a new post

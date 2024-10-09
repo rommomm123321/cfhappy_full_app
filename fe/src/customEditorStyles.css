@@ -5,3 +5,7 @@
 .fr-box.fr-basic .fr-wrapper {
 	border-radius: 0 0 10px 10px;
 }
+
+.fr-wrapper div:first-of-type {
+	display: none;
+}

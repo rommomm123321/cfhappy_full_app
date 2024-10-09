@@ -1,11 +1,47 @@
-const { Comment } = require('../models')
+const { Comment, CrossfitTerm } = require('../models')
+
+function linkifyAndTooltipify(text, terms) {
+	const removeTagRegex = /<p[^>]*data-f-id="pbf"[^>]*>.*?<\/p>/gi
+
+	// Удаление найденных тегов
+	let cleanedText = text.replace(removeTagRegex, '')
+	const termRegex = new RegExp(
+		`\\b(${terms.map(term => term.term).join('|')})\\b`,
+		'g'
+	)
+
+	cleanedText = cleanedText
+		.replace(termRegex, matched => {
+			const term = terms.find(t => t.term === matched)
+			if (term) {
+				return `<a href="https://www.youtube.com/results?search_query=${encodeURIComponent(
+					matched + ' crossfit'
+				)}" title="${
+					term.definition
+				}" target="_blank" class="tooltip-link">${matched}</a>`
+			}
+			return matched
+		})
+		.replace(/\n/g, ' ')
+		.replace(/\s+/g, ' ')
+		.trim()
+
+	return cleanedText
+}
 
 // Create a new comment
 const createComment = async (req, res) => {
 	const { postId, content, parentId } = req.body // parentId for nested comments
 	const userId = req.user.id
 	try {
-		const comment = await Comment.create({ postId, content, parentId, userId })
+		const terms = await CrossfitTerm.findAll()
+		const processedContent = linkifyAndTooltipify(content, terms)
+		const comment = await Comment.create({
+			postId,
+			content: processedContent,
+			parentId,
+			userId,
+		})
 		res.status(201).json(comment)
 	} catch (error) {
 		res.status(500).json({ message: 'Error creating comment', error })
