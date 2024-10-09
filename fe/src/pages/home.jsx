@@ -18,6 +18,16 @@ import { RandomIconsBackground } from '../components/RandomIconsBackground'
 import { Person, Phone } from '@mui/icons-material'
 import { sendFlyToTrainingAsync } from '../config/helpers'
 
+const validateName = name => {
+	const nameRegex = /^[a-zA-Zа-яА-ЯіїєІЇЄ\s]+$/ // Регулярное выражение для проверки букв и пробелов
+	return name.length >= 2 && nameRegex.test(name) // Минимум 2 символа
+}
+
+const validatePhone = phone => {
+	const phoneRegex = /^\+?[\d\s-]{7,15}$/ // Проверка на числа, пробелы и дефисы, минимум 7 цифр
+	return phoneRegex.test(phone)
+}
+
 const textArray = [
 	'Якщо штанга не падає на підлогу, отже, ти все робиш правильно!',
 	'Ти не у відпустці, а в режимі набору суперсили!',
@@ -46,13 +56,27 @@ export const Home = () => {
 	const [snackbarSeverity, setSnackbarSeverity] = useState('success')
 
 	const handleFlyToTraining = async () => {
-		// Validation: Check if fields are empty
-
 		if (!name || !phone) {
 			setSnackbarMessage('Будь ласка, заповніть всі поля.')
 			setSnackbarSeverity('error')
 			setSnackbarOpen(true)
 			return // Stop execution if validation fails
+		}
+
+		if (!validateName(name)) {
+			setSnackbarMessage(
+				"Будь ласка, введіть коректне ім'я (тільки букви, мінімум 2 символи)."
+			)
+			setSnackbarSeverity('error')
+			setSnackbarOpen(true)
+			return
+		}
+
+		if (!validatePhone(phone)) {
+			setSnackbarMessage('Будь ласка, введіть коректний номер телефону.')
+			setSnackbarSeverity('error')
+			setSnackbarOpen(true)
+			return
 		}
 
 		const data = {
@@ -64,17 +88,12 @@ export const Home = () => {
 			const response = await sendFlyToTrainingAsync(data)
 
 			if (response.status == 201) {
-				// Set flag in local storage
 				localStorage.setItem('formSubmitted', 'true')
-
-				// Set success message and open Snackbar
 				setSnackbarMessage(
 					'Ти точно не пошкодуєш! Найближчим часом з вами зв’яжеться наш оператор.'
 				)
 				setSnackbarSeverity('success')
 				setSnackbarOpen(true)
-
-				// Clear input fields
 				setName('')
 				setPhone('')
 			} else {
@@ -275,7 +294,7 @@ export const Home = () => {
 						color='info'
 						onClick={() => handleFlyToTraining()}
 					>
-						ЗАЛЕТІТИ НА ТРЕНУВАННЯ
+						Увірватися на тренування
 					</Button>
 				</Box>
 			)}

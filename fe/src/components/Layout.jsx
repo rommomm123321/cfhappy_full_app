@@ -26,6 +26,7 @@ export const Layout = ({ children }) => {
 		const clearDraft = () => {
 			localStorage.removeItem('draft_post')
 			localStorage.removeItem('draft_comment')
+			localStorage.removeItem('formSubmitted')
 		}
 
 		// Очищаем корзину и черновики сразу после загрузки страницы
