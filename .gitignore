@@ -25,5 +25,5 @@ dist-ssr
 *.sw?
 
 # Environment files
-.env
-.env.*       # To ignore files like .env.development, .env.production, etc.
+# .env
+# .env.*       # To ignore files like .env.development, .env.production, etc.
