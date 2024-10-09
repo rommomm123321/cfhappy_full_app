@@ -14,10 +14,10 @@
 		"dialect": "postgres"
 	},
 	"production": {
-		"username": "postgres",
-		"password": "pass123",
-		"database": "crm_laravel_app",
-		"host": "127.0.0.1",
+		"username": "cfhappy_db",
+		"password": "dIMIpMwj4zv8NsxaNcUkjF8vuC2bKAIi",
+		"database": "cfhappy_db",
+		"host": "dpg-cs35t13v2p9s738t8a00-a",
 		"dialect": "postgres"
 	}
 }

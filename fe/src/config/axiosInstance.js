@@ -1,7 +1,8 @@
 import axios from 'axios'
 
 // eslint-disable-next-line no-undef
-const baseURL = process.env.BE_URL || 'http://localhost:5000/api'
+const baseURL =
+	process.env.BE_URL || 'https://cfhappy-full-app.onrender.com/api/posts/api'
 
 const getToken = () => {
 	return localStorage.getItem('token') || ''
