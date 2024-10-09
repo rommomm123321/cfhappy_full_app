@@ -1,0 +1,47 @@
+.fr-view p {
+	margin: 0;
+	padding: 0;
+}
+
+.loader-overlay {
+	position: fixed; /* Cover the whole screen */
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.5); /* Dark background */
+	display: flex;
+	align-items: center; /* Center vertically */
+	justify-content: center; /* Center horizontally */
+	z-index: 9999; /* On top of other content */
+}
+
+.loader {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	animation: shake 0.5s infinite; /* Add shake animation */
+}
+
+.loader svg {
+	width: 140px; /* Set the size of the loader */
+	height: 140px; /* Set the size of the loader */
+}
+
+.loader p {
+	margin-top: 20px; /* Spacing for the message */
+	font-size: 1rem; /* Font size */
+	color: white; /* Text color */
+}
+
+a {
+	color: #3f51b5;
+	transition: color 0.3s, text-decoration 0.3s;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #7580fa;
+	text-decoration: underline;
+}
