@@ -194,7 +194,7 @@ export const Editor = ({
 								)
 								.then(res => {
 									this.image.insert(
-										res.data.image.url,
+										res.data.data.image.url,
 										null,
 										null,
 										this.image.get()
