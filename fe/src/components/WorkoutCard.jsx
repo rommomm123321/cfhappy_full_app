@@ -77,7 +77,7 @@ export const WorkoutCard = ({
 						sx={{
 							color: 'text.secondary',
 							display: 'block',
-							maxHeight: '300px',
+							maxHeight: '400px',
 							overflow: 'hidden',
 							textOverflow: 'ellipsis',
 							whiteSpace: 'nowrap',
