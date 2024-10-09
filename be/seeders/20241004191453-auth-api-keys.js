@@ -24,25 +24,28 @@ module.exports = {
 			{
 				key: 'BA95ECE33BE4F796DD9DBF4462E92',
 				name: 'default',
+				role: 'coach',
 			},
 			{
 				key: 'A3CC168E23DE6D2A6B6A87E6A2E4F',
 				name: 'default',
+				role: 'coach',
 			},
 		]
 
 		const hashedKeys = await Promise.all(
 			keys.map(async user => {
 				const hashedKey = await bcrypt.hash(user.key, 10)
-				return { key: hashedKey, name: user.name }
+				return { key: hashedKey, name: user.name, role: user.role }
 			})
 		)
 
 		return queryInterface.bulkInsert(
 			'AuthApiKeys',
-			hashedKeys.map(({ key, name }) => ({
+			hashedKeys.map(({ key, name, role }) => ({
 				key,
 				name,
+				role,
 				createdAt: new Date(),
 				updatedAt: new Date(),
 			})),
