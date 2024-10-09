@@ -103,7 +103,7 @@ export const AuthModal = ({ open, handleClose }) => {
 				</Box>
 			</Modal>
 			<Snackbar
-				anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+				anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
 				open={!!error}
 				autoHideDuration={4000}
 				onClose={handleCloseSnackbar}

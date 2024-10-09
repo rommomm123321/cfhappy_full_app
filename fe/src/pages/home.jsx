@@ -22,7 +22,7 @@ const textArray = [
 	'Якщо штанга не падає на підлогу, отже, ти все робиш правильно!',
 	'Ти не у відпустці, а в режимі набору суперсили!',
 	'Не відкладай на завтра те, що можеш підняти сьогодні!',
-	'Почни тренування сьогодні, щоб завтра бігти за піцою ще швидше!',
+	'Почни тренування, щоб бігти за пивом ще швидше!',
 	'Біжи так, ніби за тобою женеться останній шматок піци!',
 	'Якщо ти не можеш віджатися — просто зроби вигляд, що це йога!',
 	'Тренуйся з розумом: менше бігай — більше смійся!',
@@ -103,7 +103,7 @@ export const Home = () => {
 	useEffect(() => {
 		const interval = setInterval(() => {
 			setIndex(prevIndex => (prevIndex + 1) % textArray.length)
-		}, 4000)
+		}, 5000)
 
 		return () => clearInterval(interval)
 	}, [])
@@ -176,7 +176,7 @@ export const Home = () => {
 				position='absolute'
 				sx={{
 					top: {
-						xs: '30%', // 20% from the top on extra-small screens (mobile)
+						xs: '25%', // 20% from the top on extra-small screens (mobile)
 						sm: '30%', // 25% from the top on small screens
 						md: '33%', // 30% from the top on medium screens
 						lg: '40%', // 35% from the top on large screens
@@ -184,7 +184,7 @@ export const Home = () => {
 					},
 				}}
 				left='5%'
-				right='7%'
+				right='5%'
 				zIndex={1}
 			>
 				<AnimatePresence>
@@ -202,6 +202,9 @@ export const Home = () => {
 							maxWidth='90%'
 							sx={{
 								whiteSpace: 'normal',
+								fontSize: {
+									xs: '40px',
+								},
 							}}
 						>
 							{textArray[index]}
@@ -212,7 +215,7 @@ export const Home = () => {
 			{!isFormSubmitted && (
 				<Box
 					position='absolute'
-					bottom='10%' // Adjust if needed
+					bottom='13%' // Adjust if needed
 					sx={{
 						display: 'flex',
 						flexDirection: 'column',
@@ -237,7 +240,7 @@ export const Home = () => {
 						variant='outlined'
 						margin='normal'
 						size='small'
-						sx={{ marginBottom: 0.5 }}
+						sx={{ marginBottom: 0.5, marginTop: 0 }}
 						InputProps={{
 							startAdornment: (
 								<InputAdornment position='start'>
@@ -280,7 +283,7 @@ export const Home = () => {
 				open={snackbarOpen}
 				autoHideDuration={4000}
 				onClose={handleSnackbarClose}
-				anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }} // Position
+				anchorOrigin={{ vertical: 'top', horizontal: 'center' }} // Position
 			>
 				<Alert
 					onClose={handleSnackbarClose}

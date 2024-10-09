@@ -145,7 +145,7 @@ const FloatingCartButton = () => {
 		<>
 			{cartItemCount > 0 && ( // Условный рендеринг для отображения кнопки
 				<Fab
-					size='large'
+					size='medium'
 					color='success'
 					aria-label='cart'
 					onClick={() => setDrawerOpen(true)}
@@ -175,7 +175,7 @@ const FloatingCartButton = () => {
 						flexDirection: 'column',
 						backgroundColor: '#000000e3',
 						height: {
-							xs: 'calc(100% - 70px)',
+							xs: '100%',
 							sm: '100%',
 						}, // Устанавливаем высоту Drawer на 100%
 					},
@@ -251,7 +251,7 @@ const FloatingCartButton = () => {
 				</Stack>
 			</Drawer>
 			<Snackbar
-				anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+				anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
 				open={!!message}
 				autoHideDuration={4000}
 				onClose={handleSnackbarClose}

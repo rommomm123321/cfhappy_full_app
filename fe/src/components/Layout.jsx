@@ -29,8 +29,8 @@ export const Layout = ({ children }) => {
 		}
 
 		// Очищаем корзину и черновики сразу после загрузки страницы
-		clearCart()
-		clearDraft()
+		// clearCart()
+		// clearDraft()
 
 		// Устанавливаем интервал для очистки раз в час
 		const intervalId = setInterval(() => {

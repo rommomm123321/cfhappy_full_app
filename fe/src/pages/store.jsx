@@ -149,6 +149,7 @@ export const Store = () => {
 				{getCurrentUser()?.role == 'coach' && (
 					<Box display='flex' justifyContent='flex-end' mb={2}>
 						<Button
+							variant='outlined'
 							onClick={handleOpen}
 							startIcon={<AddIcon />}
 							sx={{
@@ -185,7 +186,7 @@ export const Store = () => {
 			</Grid2>
 			<Snackbar
 				TransitionComponent={Fade}
-				anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+				anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
 				open={snackbarOpen}
 				autoHideDuration={4000}
 				onClose={handleCloseSnackbar}
