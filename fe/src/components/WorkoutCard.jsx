@@ -81,7 +81,6 @@ export const WorkoutCard = ({
 							overflow: 'hidden',
 							textOverflow: 'ellipsis',
 							whiteSpace: 'nowrap',
-							color: '#fff',
 						}}
 					>
 						<div
