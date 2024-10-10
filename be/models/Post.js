@@ -37,6 +37,10 @@ module.exports = (sequelize, DataTypes) => {
 				onUpdate: 'CASCADE',
 				onDelete: 'CASCADE',
 			},
+			voice_content: {
+				type: DataTypes.JSONB,
+				allowNull: true,
+			},
 		},
 		{
 			sequelize,

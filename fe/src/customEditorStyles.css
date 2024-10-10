@@ -9,3 +9,44 @@
 .fr-wrapper div:first-of-type {
 	display: none;
 }
+
+.rhap_container {
+	max-width: 250px;
+	height: 60px;
+	border-radius: 10px;
+	padding: 10px;
+	box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5); /* Легкая тень для объема */
+	background-color: #00000071; /* Фон белого цвета */
+}
+
+.rhap_progress-bar {
+	background-color: #e0e0e0; /* Светло-серый цвет для фона прогресс-бара */
+	height: 4px; /* Тонкий прогресс-бар */
+	border-radius: 5px;
+}
+
+.rhap_progress-filled {
+	background-color: #29b6f6; /* Основной цвет MUI для заполнения прогресс-бара */
+}
+
+.rhap_main-controls-button {
+	margin: 0;
+	color: #29b6f6; /* Основной цвет MUI для кнопки воспроизведения */
+}
+
+.rhap_controls-section {
+	display: flex;
+	justify-content: space-between; /* Упорядочивает кнопки по краям */
+	align-items: center;
+	margin: 0;
+}
+
+.rhap_play-pause-button svg {
+	width: 40px; /* Уменьшение размера кнопки воспроизведения */
+	height: 40px;
+}
+
+.rhap_time {
+	font-size: 12px;
+	color: #ffffff; /* Нейтральный серый цвет для времени */
+}

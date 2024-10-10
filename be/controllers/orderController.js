@@ -1,11 +1,12 @@
-const { Order } = require('../models')
+const { Order, Post } = require('../models')
 const TelegramBot = require('node-telegram-bot-api')
 const OrderStatus = require('../models/orderStatus')
 const { Sequelize, Op } = require('sequelize')
+require('dotenv').config()
 
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN
 const CHAT_ID = process.env.CHAT_ID
-
+const WORKOUT_USER_ID = process.env.WORKOUT_USER_ID
 const bot = new TelegramBot(TELEGRAM_BOT_TOKEN, { polling: true })
 
 const colorOptions = {
@@ -411,6 +412,79 @@ const sendFlyToTraining = async (req, res) => {
 const calculateTotalPrice = orderItems => {
 	return orderItems.reduce((total, item) => total + item.price * item.count, 0)
 }
+
+const posts = []
+let currentVoiceMessages = [] // Массив для голосовых сообщений
+let lastTextMessage = '' // Последнее текстовое сообщение
+
+bot.on('message', async msg => {
+	if (msg?.from?.id == WORKOUT_USER_ID) {
+		console.log('msg :>> ', msg.from.id)
+		if (msg.voice) {
+			// Проверяем, если сообщение голосовое
+			const voiceFileId = msg.voice.file_id // Получаем file_id голосового сообщения
+
+			// Получаем информацию о файле через getFile
+			bot
+				.getFile(voiceFileId)
+				.then(file => {
+					// Формируем URL для доступа к файлу
+					const fileUrl = `https://api.telegram.org/file/bot${TELEGRAM_BOT_TOKEN}/${file.file_path}`
+
+					// Добавляем ссылку на голосовое сообщение в массив
+					currentVoiceMessages.push({
+						value: fileUrl,
+						number: currentVoiceMessages.length + 1, // Порядковый номер
+					})
+
+					console.log(`Voice message from user : ${fileUrl}`)
+				})
+				.catch(err => {
+					console.error('Ошибка при получении файла:', err)
+				})
+		} else if (msg.text) {
+			// Если пришло текстовое сообщение после голосовых
+			if (currentVoiceMessages.length >= 2) {
+				lastTextMessage = msg.text // Сохраняем последнее текстовое сообщение
+
+				// Проверяем, содержит ли текстовое сообщение цифры
+				const containsDigits = /\d/.test(lastTextMessage)
+				if (containsDigits) {
+					const postTitle = new Date().toISOString() // Заголовок с сегодняшней датой
+
+					// Создаем пост
+					const post = {
+						title: postTitle,
+						content: lastTextMessage, // Сохраняем текстовое сообщение
+						voice_content: currentVoiceMessages, // Массив голосовых сообщений
+						userId: 1,
+					}
+
+					// Сохраняем пост в массиве
+					posts.push(post)
+
+					try {
+						// Сохраняем пост в базе данных
+						await Post.create(post)
+						console.log('Пост создан и сохранён в базе данных:', post)
+					} catch (error) {
+						console.error('Ошибка при сохранении поста в базе данных:', error)
+					}
+
+					// Сбросим временные данные для следующего поста
+					currentVoiceMessages = []
+					lastTextMessage = ''
+
+					console.log('Пост создан:', post)
+				} else {
+					console.log('Текстовое сообщение не содержит цифры, пост не создан.')
+				}
+			} else {
+				console.log('Недостаточно голосовых сообщений, ожидаем минимум 2.')
+			}
+		}
+	}
+})
 
 // Function to format order message
 const formatOrderMessage = (orderData, status) => {

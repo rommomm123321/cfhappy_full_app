@@ -21,6 +21,9 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import { AuthModal } from '../components/AuthModal'
 import { Editor } from '../components/Editor'
 import { Comment } from '../components/Comment'
+import AudioPlayer from 'react-h5-audio-player'
+import 'react-h5-audio-player/lib/styles.css'
+import '../customEditorStyles.css'
 
 dayjs.locale('uk')
 
@@ -155,6 +158,33 @@ export const WorkoutDetails = () => {
 						/>
 					</Box>
 				</CardContent>
+				<Grid2 container spacing={0.5}>
+					{Array.isArray(data.voice_content) &&
+						data.voice_content.length > 0 &&
+						// Перемещаем Grid2 item внутрь map, чтобы каждый аудиоплеер был в своем собственном элементе Grid2
+						data.voice_content
+							.sort((a, b) => a.number - b.number)
+							.map(src => (
+								<Grid2
+									size={{ xs: 12 }}
+									item
+									key={src.number}
+									sx={{ padding: '8px' }}
+								>
+									{' '}
+									{/* Задаем xs={12} для полной ширины */}
+									<AudioPlayer
+										src={src.value} // Используем значение элемента массива
+										onPlay={e => console.log(`Playing audio ${src.number}`)} // Используем number для идентификации
+										customAdditionalControls={[]}
+										showSkipControls={false}
+										showJumpControls={false}
+										customVolumeControls={[]}
+										layout='horizontal-reverse'
+									/>
+								</Grid2>
+							))}
+				</Grid2>
 				<Divider />
 				<CardContent>
 					<Grid2

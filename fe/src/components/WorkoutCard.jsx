@@ -7,6 +7,7 @@ import {
 	CardActions,
 	CardContent,
 	Divider,
+	Grid2,
 	IconButton,
 	Menu,
 	MenuItem,
@@ -18,6 +19,9 @@ import '../index.css'
 import { useNavigate } from 'react-router-dom'
 import { getCurrentUser } from '../config/helpers'
 import { useState } from 'react'
+import AudioPlayer from 'react-h5-audio-player'
+import 'react-h5-audio-player/lib/styles.css'
+import '../customEditorStyles.css'
 
 export const WorkoutCard = ({
 	workout,
@@ -77,7 +81,7 @@ export const WorkoutCard = ({
 						variant='body2'
 						sx={{
 							display: 'block',
-							maxHeight: '500px',
+							maxHeight: '600px',
 							overflow: 'hidden',
 							// textOverflow: 'ellipsis',
 							whiteSpace: 'wrap',
@@ -91,6 +95,33 @@ export const WorkoutCard = ({
 					</Box>
 				</CardContent>
 			</CardActionArea>
+			<Grid2 container spacing={0.5}>
+				{Array.isArray(workout.voice_content) &&
+					workout.voice_content.length > 0 &&
+					// Перемещаем Grid2 item внутрь map, чтобы каждый аудиоплеер был в своем собственном элементе Grid2
+					workout.voice_content
+						.sort((a, b) => a.number - b.number)
+						.map(src => (
+							<Grid2
+								size={{ xs: 12 }}
+								item
+								key={src.number}
+								sx={{ padding: '8px' }}
+							>
+								{' '}
+								{/* Задаем xs={12} для полной ширины */}
+								<AudioPlayer
+									src={src.value} // Используем значение элемента массива
+									onPlay={e => console.log(`Playing audio ${src.number}`)} // Используем number для идентификации
+									customAdditionalControls={[]}
+									showSkipControls={false}
+									showJumpControls={false}
+									customVolumeControls={[]}
+									layout='horizontal-reverse'
+								/>
+							</Grid2>
+						))}
+			</Grid2>
 			<Box>
 				<Divider />
 				<CardActions
@@ -110,6 +141,7 @@ export const WorkoutCard = ({
 						)}
 				</CardActions>
 			</Box>
+
 			<Menu
 				anchorEl={anchorEl}
 				open={Boolean(anchorEl)}
