@@ -2,7 +2,7 @@ import axios from 'axios'
 
 // eslint-disable-next-line no-undef
 const baseURL =
-	process.env.BE_URL_LOCAL || 'https://cfhappy-full-app.onrender.com/api'
+	process.env.BE_URL || 'https://cfhappy-full-app.onrender.com/api'
 
 const getToken = () => {
 	return localStorage.getItem('token') || ''

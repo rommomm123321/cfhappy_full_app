@@ -175,12 +175,13 @@ export const WorkoutDetails = () => {
 									{/* Задаем xs={12} для полной ширины */}
 									<AudioPlayer
 										src={src.value} // Используем значение элемента массива
-										onPlay={e => console.log(`Playing audio ${src.number}`)} // Используем number для идентификации
+										// onPlay={e => console.log(`Playing audio ${src.number}`)} // Используем number для идентификации
 										customAdditionalControls={[]}
 										showSkipControls={false}
 										showJumpControls={false}
 										customVolumeControls={[]}
 										layout='horizontal-reverse'
+										autoPlay={false}
 									/>
 								</Grid2>
 							))}
