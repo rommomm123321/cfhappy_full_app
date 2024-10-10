@@ -11,19 +11,24 @@ import {
 import CloseIcon from '@mui/icons-material/Close'
 import { useState } from 'react'
 import { getToken } from '../config/helpers'
+import { useLoader } from '../hooks/useLoader'
 
 export const AuthModal = ({ open, handleClose }) => {
 	const [key, setKey] = useState('')
 	const [name, setName] = useState('')
 	const [error, setError] = useState(null)
 
+	const { showLoader, hideLoader } = useLoader()
+
 	const handleSend = async () => {
 		try {
+			showLoader()
 			const data = await getToken(key, name)
 			if (data.status == 200) {
 				handleClose()
 				setKey('')
 				setName('')
+				hideLoader()
 				window.location.reload()
 			}
 		} catch (error) {
@@ -32,6 +37,7 @@ export const AuthModal = ({ open, handleClose }) => {
 			)
 			// handleClose()
 			console.error('Error sending auth:', error)
+			hideLoader()
 		}
 	}
 
@@ -72,7 +78,7 @@ export const AuthModal = ({ open, handleClose }) => {
 					<Grid2 spacing={2} container sx={{ marginTop: '10px' }}>
 						<TextField
 							size='small'
-							label='Клікуха'
+							label="Ім'я"
 							variant='outlined'
 							fullWidth
 							value={name}

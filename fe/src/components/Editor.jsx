@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import { Box, Button } from '@mui/material'
+import { Box, Button, useMediaQuery } from '@mui/material'
 import 'froala-editor/css/froala_editor.pkgd.min.css'
 import 'froala-editor/css/froala_style.min.css'
 import 'froala-editor/js/plugins.pkgd.min.js'
@@ -34,6 +34,7 @@ export const Editor = ({
 	const [content, setContent] = useState('')
 
 	const { id } = useParams()
+	const isMobile = useMediaQuery('(max-width:600px)')
 
 	const handleSend = async () => {
 		try {
@@ -267,15 +268,18 @@ export const Editor = ({
 					</Button>
 				</Box>
 			) : (
-				<Button
-					disabled={!content}
-					variant='contained'
-					color='primary'
-					onClick={handleSend}
-					sx={{ marginTop: '10px' }}
-				>
-					Додати
-				</Button>
+				<Box display='flex' justifyContent='flex-end'>
+					<Button
+						fullWidth={isMobile}
+						disabled={!content}
+						variant='contained'
+						color='primary'
+						onClick={handleSend}
+						sx={{ marginTop: '10px' }}
+					>
+						Додати
+					</Button>
+				</Box>
 			)}
 		</Box>
 	)

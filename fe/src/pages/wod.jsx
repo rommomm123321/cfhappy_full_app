@@ -479,7 +479,7 @@ export const Wod = () => {
 
 	return (
 		<Box
-			padding={{ xs: '7rem 0rem 5rem 0rem', sm: '7rem 2rem 5rem 2rem' }}
+			padding={{ xs: '7rem 0.5rem 5rem 0.5rem', sm: '7rem 2rem 5rem 2rem' }}
 			sx={
 				{
 					// display: 'flex',

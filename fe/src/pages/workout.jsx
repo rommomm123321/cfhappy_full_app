@@ -59,11 +59,7 @@ export const Workout = () => {
 		window.scrollTo({ top: 0, behavior: 'smooth' })
 	}
 	return (
-		<Box
-			sx={{
-				padding: '7rem 1rem 5rem 1rem',
-			}}
-		>
+		<Box padding={{ xs: '7rem 0.5rem 5rem 0.5rem', sm: '7rem 2rem 5rem 2rem' }}>
 			<Typography
 				variant='h4'
 				align='center'
@@ -73,13 +69,12 @@ export const Workout = () => {
 			>
 				База тренувань
 			</Typography>
-
 			<SearchSection
 				setData={setData}
 				setTotalPages={setTotalPages}
 				setQueryParams={setQueryParams}
 			/>
-			{localStorage.getItem('token') && getCurrentUser()?.role == 'coach' && (
+			{getCurrentUser()?.role == 'coach' && localStorage.getItem('token') && (
 				<Editor
 					setLoad={setLoad}
 					page={page}
@@ -102,13 +97,15 @@ export const Workout = () => {
 					</Grid2>
 				))}
 			</Grid2>
-			<Pagination
-				size='small'
-				count={totalPages}
-				page={page}
-				onChange={handlePageChange}
-				sx={{ marginTop: '20px', display: 'flex', justifyContent: 'center' }}
-			/>
+			{data.length > 0 && (
+				<Pagination
+					size='small'
+					count={totalPages}
+					page={page}
+					onChange={handlePageChange}
+					sx={{ marginTop: '20px', display: 'flex', justifyContent: 'center' }}
+				/>
+			)}
 		</Box>
 	)
 }

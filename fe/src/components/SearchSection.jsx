@@ -39,6 +39,10 @@ export const SearchSection = ({ setQueryParams }) => {
 						sx={{
 							justifyContent: 'center',
 							alignItems: 'center',
+							padding: 2,
+							borderRadius: 2,
+							boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.5)', // Enhanced shadow for a more elegant look
+							backgroundColor: '#0000009c',
 						}}
 					>
 						<Grid2 size={{ xs: 12, sm: 4, md: 4 }}>

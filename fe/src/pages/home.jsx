@@ -122,7 +122,7 @@ export const Home = () => {
 	useEffect(() => {
 		const interval = setInterval(() => {
 			setIndex(prevIndex => (prevIndex + 1) % textArray.length)
-		}, 5000)
+		}, 4000)
 
 		return () => clearInterval(interval)
 	}, [])
@@ -195,9 +195,9 @@ export const Home = () => {
 				position='absolute'
 				sx={{
 					top: {
-						xs: '25%', // 20% from the top on extra-small screens (mobile)
+						xs: '35%', // 20% from the top on extra-small screens (mobile)
 						sm: '30%', // 25% from the top on small screens
-						md: '33%', // 30% from the top on medium screens
+						md: '35%', // 30% from the top on medium screens
 						lg: '40%', // 35% from the top on large screens
 						// xl: '50%', // 40% from the top on extra-large screens
 					},
@@ -221,9 +221,6 @@ export const Home = () => {
 							maxWidth='90%'
 							sx={{
 								whiteSpace: 'normal',
-								fontSize: {
-									xs: '40px',
-								},
 							}}
 						>
 							{textArray[index]}
@@ -231,7 +228,7 @@ export const Home = () => {
 					</motion.div>
 				</AnimatePresence>
 			</Box>
-			{!isFormSubmitted && (
+			{/* {!isFormSubmitted && (
 				<Box
 					position='absolute'
 					bottom='13%' // Adjust if needed
@@ -297,7 +294,7 @@ export const Home = () => {
 						Увірватися на тренування
 					</Button>
 				</Box>
-			)}
+			)} */}
 			<Snackbar
 				open={snackbarOpen}
 				autoHideDuration={4000}

@@ -87,7 +87,8 @@ const updateComment = async (req, res) => {
 		if (!comment) {
 			return res.status(404).json({ message: 'Comment not found' })
 		}
-		comment.content = content
+		const terms = await CrossfitTerm.findAll()
+		comment.content = linkifyAndTooltipify(content, terms)
 		await comment.save()
 		res.status(200).json(comment)
 	} catch (error) {

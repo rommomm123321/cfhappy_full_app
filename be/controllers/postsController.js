@@ -146,7 +146,8 @@ const updatePost = async (req, res) => {
 			return res.status(404).json({ message: 'Post not found' })
 		}
 		post.title = title
-		post.content = content
+		const terms = await CrossfitTerm.findAll()
+		post.content = linkifyAndTooltipify(content, terms)
 		await post.save()
 		res.status(200).json(post)
 	} catch (error) {

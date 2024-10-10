@@ -135,7 +135,7 @@ export const Store = () => {
 	}
 
 	return (
-		<Box padding={{ xs: '7rem 1rem 5rem 1rem', sm: '7rem 2rem 5rem 2rem' }}>
+		<Box padding={{ xs: '7rem 0.5rem 5rem 0.5rem', sm: '7rem 2rem 5rem 2rem' }}>
 			<Typography
 				variant='h4'
 				align='center'
@@ -145,31 +145,23 @@ export const Store = () => {
 			>
 				Мерч CrossFit Happy
 			</Typography>
-			<>
-				{getCurrentUser()?.role == 'coach' && (
-					<Box display='flex' justifyContent='flex-end' mb={2}>
-						<Button
-							variant='outlined'
-							onClick={handleOpen}
-							startIcon={<AddIcon />}
-							sx={{
-								width: { xs: '100%', sm: 'auto' }, // fullWidth на мобильных, авто на больших экранах
-							}}
-						>
-							Додати товар
-						</Button>
-					</Box>
-				)}
 
-				<ProductModal
-					open={modalOpen}
-					handleClose={handleClose}
-					setLoad={setLoad}
-					editableData={editableData}
-					setIsEdit={setIsEdit}
-					isEdit={isEdit}
-				/>
-			</>
+			{getCurrentUser()?.role == 'coach' && localStorage.getItem('token') && (
+				<Box display='flex' justifyContent='flex-end' mb={2}>
+					<Button
+						size='small'
+						variant='outlined'
+						onClick={handleOpen}
+						startIcon={<AddIcon />}
+						sx={{
+							width: { xs: '100%', sm: 'auto' }, // fullWidth на мобильных, авто на больших экранах
+						}}
+					>
+						Додати товар
+					</Button>
+				</Box>
+			)}
+
 			<Grid2 container spacing={2} justifyContent='center'>
 				{data.map(product => (
 					<Grid2 size={{ xs: 12, sm: 6, md: 6, lg: 4 }} key={product.id}>
@@ -190,6 +182,9 @@ export const Store = () => {
 				open={snackbarOpen}
 				autoHideDuration={4000}
 				onClose={handleCloseSnackbar}
+				sx={{
+					pointerEvents: 'none',
+				}}
 			>
 				<Alert
 					onClose={handleCloseSnackbar}
@@ -199,12 +194,22 @@ export const Store = () => {
 					{snackbarMessage}
 				</Alert>
 			</Snackbar>
-			<Pagination
-				size='small'
-				count={totalPages}
-				page={page}
-				onChange={handlePageChange}
-				sx={{ marginTop: '20px', display: 'flex', justifyContent: 'center' }}
+			{data.length > 0 && (
+				<Pagination
+					size='small'
+					count={totalPages}
+					page={page}
+					onChange={handlePageChange}
+					sx={{ marginTop: '20px', display: 'flex', justifyContent: 'center' }}
+				/>
+			)}
+			<ProductModal
+				open={modalOpen}
+				handleClose={handleClose}
+				setLoad={setLoad}
+				editableData={editableData}
+				setIsEdit={setIsEdit}
+				isEdit={isEdit}
 			/>
 		</Box>
 	)

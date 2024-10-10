@@ -59,7 +59,7 @@ export const WorkoutDetails = () => {
 			hideLoader()
 		}
 	}
-
+	console.log('data :>> ', data)
 	const handleDeleteComment = async id => {
 		try {
 			await deleteComment(id)
@@ -96,7 +96,7 @@ export const WorkoutDetails = () => {
 			sx={{
 				background: '#121212',
 			}}
-			padding={{ xs: '7rem 0rem 5rem 0rem', sm: '7rem 1rem 5rem 1rem' }}
+			padding={{ xs: '7rem 0.5rem 5rem 0.5rem', sm: '7rem 1rem 5rem 1rem' }}
 		>
 			<Box display='flex' alignItems='center' mb={3} justifyContent='center'>
 				<IconButton
@@ -117,12 +117,12 @@ export const WorkoutDetails = () => {
 							variant='h5'
 							sx={{ marginLeft: 2, marginRight: 2, textTransform: 'uppercase' }}
 						>
-							{dayjs(data.date).format('dddd')}
+							{dayjs(data.createdAt).format('dddd')}
 						</Typography>
 					</Grid2>
 					<Grid2 item>
 						<Typography variant='h4' sx={{ marginLeft: 2, marginRight: 2 }}>
-							{dayjs(data.date).format('DD-MM-YYYY')}
+							{dayjs(data.createdAt).format('DD-MM-YYYY')}
 						</Typography>
 					</Grid2>
 				</Grid2>
@@ -171,12 +171,13 @@ export const WorkoutDetails = () => {
 								sx={{ textTransform: 'uppercase' }}
 								color='textDisabled'
 							>
-								Комментарі за {dayjs(data.date).format('DD-MM-YYYY')}
+								Комментарі за {dayjs(data.createdAt).format('DD-MM-YYYY')}
 							</Typography>
 						</Grid2>
-						<Grid2 size={{ xs: 12, sm: 3, md: 3 }}>
+						<Grid2 size={{ xs: 12, sm: 6, md: 3 }}>
 							{!localStorage.getItem('token') && (
 								<Button
+									size='small'
 									variant='contained'
 									color='inherit'
 									fullWidth
@@ -214,13 +215,16 @@ export const WorkoutDetails = () => {
 					/>
 				))}
 			</Box>
-			<Pagination
-				size='small'
-				count={totalPages}
-				page={page}
-				onChange={handlePageChange}
-				sx={{ marginTop: '20px', display: 'flex', justifyContent: 'center' }}
-			/>
+			{data.comments.length > 0 && (
+				<Pagination
+					size='small'
+					count={totalPages}
+					page={page}
+					onChange={handlePageChange}
+					sx={{ marginTop: '20px', display: 'flex', justifyContent: 'center' }}
+				/>
+			)}
+
 			<AuthModal open={open} handleClose={handleClose} />
 		</Box>
 	)

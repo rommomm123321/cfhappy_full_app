@@ -1,25 +1,26 @@
 import { useEffect, useState } from 'react'
-import { Box } from '@mui/material'
+import { Box, useMediaQuery } from '@mui/material'
 import CrossFit from '../assets/CrossFit.svg?react'
 
 export const RandomIconsBackground = () => {
 	// Create a state to store icon positions and sizes
 	const [icons, setIcons] = useState([])
+	const isMobile = useMediaQuery('(max-width:600px)')
 
 	// This effect will run once on mount to generate random positions and sizes for icons
 	useEffect(() => {
 		const generateIcons = () => {
-			return Array.from({ length: 10 }).map(() => ({
+			return Array.from({ length: 15 }).map(() => ({
 				top: `${Math.random() * 90}%`,
 				left: `${Math.random() * 90}%`,
 				bottom: `${Math.random() * 90}%`,
-				width: `${Math.random() * 100 + 20}px`,
+				width: `${Math.random() * isMobile ? 60 : 80 + 20}px`,
 				opacity: Math.random() * 0.2 + 0.4,
 			}))
 		}
 
 		setIcons(generateIcons)
-	}, [])
+	}, [isMobile])
 
 	return (
 		<Box

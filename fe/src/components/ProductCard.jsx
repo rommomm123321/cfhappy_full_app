@@ -11,6 +11,7 @@ import {
 	Divider,
 	Menu,
 	MenuItem,
+	useMediaQuery,
 } from '@mui/material'
 import { MoreHoriz, ShoppingCart } from '@mui/icons-material'
 import 'swiper/css'
@@ -31,6 +32,7 @@ const ProductCard = ({
 
 	// Ссылка на экземпляр Swiper
 	const swiperRef = useRef(null)
+	const isMobile = useMediaQuery('(max-width:600px)')
 
 	const handleSizeChange = size => {
 		setSelectedSize(size)
@@ -123,7 +125,11 @@ const ProductCard = ({
 						<img
 							src={image.url}
 							alt={`image-${index}`}
-							style={{ width: '100%', height: 'auto', borderRadius: '8px' }}
+							style={{
+								width: '100%',
+								height: 'auto',
+								borderRadius: isMobile ? '0' : '4px 4px 0 0',
+							}}
 						/>
 					</SwiperSlide>
 				))}
@@ -133,7 +139,15 @@ const ProductCard = ({
 				<Typography gutterBottom variant='h6' component='div' color='primary'>
 					{product.name}
 				</Typography>
-				<Typography variant='body2' color='' sx={{ mb: 2 }}>
+				<Typography variant='caption' color='textDisabled' sx={{ mb: 0.5 }}>
+					Опис:
+				</Typography>
+				<Typography
+					variant='body2'
+					color=''
+					sx={{ mb: 2 }}
+					whiteSpace='pre-wrap'
+				>
 					{product.description}
 				</Typography>
 
@@ -224,15 +238,16 @@ const ProductCard = ({
 						>
 							<ShoppingCart />
 						</IconButton>
-						{getCurrentUser()?.role == 'coach' && (
-							<IconButton
-								size='small'
-								sx={{ marginLeft: 'auto', borderRadius: '5px' }}
-								onClick={handleMenuClick}
-							>
-								<MoreHoriz />
-							</IconButton>
-						)}
+						{getCurrentUser()?.role == 'coach' &&
+							localStorage.getItem('token') && (
+								<IconButton
+									size='small'
+									sx={{ marginLeft: 'auto', borderRadius: '5px' }}
+									onClick={handleMenuClick}
+								>
+									<MoreHoriz />
+								</IconButton>
+							)}
 					</Box>
 				</Stack>
 			</CardContent>

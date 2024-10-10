@@ -60,7 +60,7 @@ const handleRouteClick = () => {
 
 export const Map = () => {
 	return (
-		<Box padding={{ xs: '7rem 0rem 5rem 0rem', sm: '7rem 2rem 5rem 2rem' }}>
+		<Box padding={{ xs: '7rem 0.5rem 5rem 0.5rem', sm: '7rem 2rem 5rem 2rem' }}>
 			<Box sx={{ padding: 0, margin: 0 }}>
 				<Grid2
 					container

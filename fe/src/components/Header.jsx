@@ -1,4 +1,11 @@
-import { AppBar, Box, Toolbar, IconButton, Stack } from '@mui/material'
+import {
+	AppBar,
+	Box,
+	Toolbar,
+	IconButton,
+	Stack,
+	keyframes,
+} from '@mui/material'
 import {
 	FitnessCenter,
 	Map,
@@ -16,6 +23,28 @@ export const Header = () => {
 
 	const handleOpen = () => setOpen(true)
 	const handleClose = () => setOpen(false)
+
+	const smileEffectStyle = {
+		animation: 'smileEffect 5s ease-in-out infinite',
+	}
+
+	const keyframesStyle = `
+  @keyframes smileEffect {
+    0%, 100% {
+      transform: scale(1) rotate(0deg);
+    }
+    50% {
+      transform: scale(1.1) rotate(5deg);
+    }
+    75% {
+      transform: scale(1.05) rotate(-5deg);
+    }
+  }
+`
+
+	// Вставляем keyframes в документ
+	const styleSheet = document.styleSheets[0]
+	styleSheet.insertRule(keyframesStyle, styleSheet.cssRules.length)
 
 	const headerMenu = [
 		{
@@ -65,6 +94,7 @@ export const Header = () => {
 								color: 'white',
 								width: useMatch('/') ? '120px' : '75px',
 								height: useMatch('/') ? '120px' : '75px',
+								// ...smileEffectStyle,
 							}}
 						/>
 					</NavLink>

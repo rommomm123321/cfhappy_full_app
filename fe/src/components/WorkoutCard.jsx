@@ -65,6 +65,7 @@ export const WorkoutCard = ({
 				display: 'flex',
 				flexDirection: 'column',
 				justifyContent: 'space-between',
+				borderRadius: 1,
 			}}
 		>
 			<CardActionArea>
@@ -76,10 +77,10 @@ export const WorkoutCard = ({
 						variant='body2'
 						sx={{
 							display: 'block',
-							maxHeight: '400px',
+							maxHeight: '500px',
 							overflow: 'hidden',
-							textOverflow: 'ellipsis',
-							whiteSpace: 'nowrap',
+							// textOverflow: 'ellipsis',
+							whiteSpace: 'wrap',
 						}}
 					>
 						<div
@@ -101,11 +102,12 @@ export const WorkoutCard = ({
 							{workout.comments.length}
 						</Typography>
 					</Button>
-					{getCurrentUser()?.role == 'coach' && (
-						<IconButton sx={{ marginLeft: 'auto' }} onClick={handleMenuClick}>
-							<MoreHoriz />
-						</IconButton>
-					)}
+					{getCurrentUser()?.role == 'coach' &&
+						localStorage.getItem('token') && (
+							<IconButton sx={{ marginLeft: 'auto' }} onClick={handleMenuClick}>
+								<MoreHoriz />
+							</IconButton>
+						)}
 				</CardActions>
 			</Box>
 			<Menu

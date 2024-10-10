@@ -141,6 +141,7 @@ export const ProductModal = ({
 		{ title: 'XXL', label: 'Double Extra Large' },
 		{ title: '3XL', label: 'Triple Extra Large' },
 		{ title: 'OVERSIZE', label: 'Triple Extra Large' },
+		{ title: 'One size', label: 'One size' },
 	]
 
 	const availableSizes = useMemo(() => {
@@ -251,7 +252,8 @@ export const ProductModal = ({
 								variant='outlined'
 								fullWidth
 								multiline
-								rows={4}
+								minRows={4}
+								maxRows={10}
 								value={description}
 								onChange={e => setDescription(e.target.value)}
 							/>
