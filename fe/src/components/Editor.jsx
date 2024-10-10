@@ -88,7 +88,16 @@ export const Editor = ({
 	useEffect(() => {
 		// Сохраняем черновик в localStorage при изменении содержимого
 		const draftKey = isComment ? 'draft_comment' : 'draft_post'
-		localStorage.setItem(draftKey, content)
+		const froalaEditorContent = `<p data-f-id="pbf" style="text-align: center; font-size: 14px; margin-top: 30px; opacity: 0.65; font-family: sans-serif;">Powered by <a href="https://www.froala.com/wysiwyg-editor?pb=1" title="Froala Editor">Froala Editor</a></p>`
+
+		if (content === froalaEditorContent) {
+			// Очищаем контент и localStorage
+			localStorage.removeItem(draftKey) // Удаляем из localStorage
+			setContent('')
+		} else {
+			// Сохраняем содержимое в localStorage
+			localStorage.setItem(draftKey, content)
+		}
 	}, [content, isComment])
 
 	const handleCancel = () => {
