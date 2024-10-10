@@ -7,19 +7,52 @@ export const RandomIconsBackground = () => {
 	const [icons, setIcons] = useState([])
 	const isMobile = useMediaQuery('(max-width:600px)')
 
+	// Function to check if two rectangles overlap
+	const checkOverlap = (newIcon, existingIcons) => {
+		return existingIcons.some(icon => {
+			const newRect = {
+				top: (parseFloat(newIcon.top) * window.innerHeight) / 100,
+				left: (parseFloat(newIcon.left) * window.innerWidth) / 100,
+				width: parseFloat(newIcon.width),
+				height: parseFloat(newIcon.width), // assuming square icons for simplicity
+			}
+			const existingRect = {
+				top: (parseFloat(icon.top) * window.innerHeight) / 100,
+				left: (parseFloat(icon.left) * window.innerWidth) / 100,
+				width: parseFloat(icon.width),
+				height: parseFloat(icon.width),
+			}
+
+			return !(
+				newRect.left + newRect.width < existingRect.left ||
+				newRect.left > existingRect.left + existingRect.width ||
+				newRect.top + newRect.height < existingRect.top ||
+				newRect.top > existingRect.top + existingRect.height
+			)
+		})
+	}
+
 	// This effect will run once on mount to generate random positions and sizes for icons
 	useEffect(() => {
 		const generateIcons = () => {
-			return Array.from({ length: 15 }).map(() => ({
-				top: `${Math.random() * 90}%`,
-				left: `${Math.random() * 90}%`,
-				bottom: `${Math.random() * 90}%`,
-				width: `${Math.random() * isMobile ? 60 : 80 + 20}px`,
-				opacity: Math.random() * 0.2 + 0.4,
-			}))
+			const newIcons = []
+			while (newIcons.length < 30) {
+				const newIcon = {
+					top: `${Math.random() * 90}%`,
+					left: `${Math.random() * 90}%`,
+					width: `${Math.random() * (isMobile ? 50 : 100) + 20}px`,
+					opacity: Math.random() * 0.2 + 0.4,
+				}
+
+				// Only add the new icon if it doesn't overlap with existing icons
+				if (!checkOverlap(newIcon, newIcons)) {
+					newIcons.push(newIcon)
+				}
+			}
+			return newIcons
 		}
 
-		setIcons(generateIcons)
+		setIcons(generateIcons())
 	}, [isMobile])
 
 	return (

@@ -95,52 +95,63 @@ export const WorkoutCard = ({
 					</Box>
 				</CardContent>
 			</CardActionArea>
-			<Grid2 container spacing={0.5}>
-				{Array.isArray(workout.voice_content) &&
-					workout.voice_content.length > 0 &&
-					// Перемещаем Grid2 item внутрь map, чтобы каждый аудиоплеер был в своем собственном элементе Grid2
-					workout.voice_content
-						.sort((a, b) => a.number - b.number)
-						.map(src => (
-							<Grid2
-								size={{ xs: 12 }}
-								item
-								key={src.number}
-								sx={{ padding: '8px' }}
-							>
-								{' '}
-								{/* Задаем xs={12} для полной ширины */}
-								<AudioPlayer
-									autoPlay={false}
-									src={src.value} // Используем значение элемента массива
-									// onPlay={e => console.log(`Playing audio ${src.number}`)} // Используем number для идентификации
-									customAdditionalControls={[]}
-									showSkipControls={false}
-									showJumpControls={false}
-									customVolumeControls={[]}
-									layout='horizontal-reverse'
-								/>
-							</Grid2>
-						))}
-			</Grid2>
 			<Box>
-				<Divider />
-				<CardActions
-					sx={{ justifyContent: 'flex-end', padding: '5px', marginTop: 'auto' }}
-				>
-					<Button onClick={handleCardClick} size='small'>
-						<Comment />
-						<Typography variant='body2' sx={{ marginLeft: '4px' }}>
-							{workout.comments.length}
-						</Typography>
-					</Button>
-					{getCurrentUser()?.role == 'coach' &&
-						localStorage.getItem('token') && (
-							<IconButton sx={{ marginLeft: 'auto' }} onClick={handleMenuClick}>
-								<MoreHoriz />
-							</IconButton>
-						)}
-				</CardActions>
+				{Array.isArray(workout.voice_content) &&
+					workout.voice_content.length > 0 && <Divider />}
+				<Grid2 container spacing={0.5}>
+					{Array.isArray(workout.voice_content) &&
+						workout.voice_content.length > 0 &&
+						// Перемещаем Grid2 item внутрь map, чтобы каждый аудиоплеер был в своем собственном элементе Grid2
+						workout.voice_content
+							.sort((a, b) => a.number - b.number)
+							.map(src => (
+								<Grid2
+									size={{ xs: 12 }}
+									item
+									key={src.number}
+									sx={{ padding: '8px' }}
+								>
+									{' '}
+									{/* Задаем xs={12} для полной ширины */}
+									<AudioPlayer
+										autoPlay={false}
+										src={src.value} // Используем значение элемента массива
+										// onPlay={e => console.log(`Playing audio ${src.number}`)} // Используем number для идентификации
+										customAdditionalControls={[]}
+										// showSkipControls={false}
+										showJumpControls={false}
+										// customVolumeControls={[]}
+										// layout='horizontal-reverse'
+									/>
+								</Grid2>
+							))}
+				</Grid2>
+				<Box>
+					<Divider />
+					<CardActions
+						sx={{
+							justifyContent: 'flex-end',
+							padding: '5px',
+							marginTop: 'auto',
+						}}
+					>
+						<Button onClick={handleCardClick} size='small'>
+							<Comment />
+							<Typography variant='body2' sx={{ marginLeft: '4px' }}>
+								{workout.comments.length}
+							</Typography>
+						</Button>
+						{getCurrentUser()?.role == 'coach' &&
+							localStorage.getItem('token') && (
+								<IconButton
+									sx={{ marginLeft: 'auto' }}
+									onClick={handleMenuClick}
+								>
+									<MoreHoriz />
+								</IconButton>
+							)}
+					</CardActions>
+				</Box>
 			</Box>
 
 			<Menu

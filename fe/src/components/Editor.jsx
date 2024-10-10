@@ -15,7 +15,7 @@ import {
 } from '../config/helpers'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
-import '../customEditorStyles.css'
+import '../editorStyles.css'
 // eslint-disable-next-line no-unused-vars
 import { uploadFile } from 'react-s3'
 

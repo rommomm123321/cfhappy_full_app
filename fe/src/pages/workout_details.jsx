@@ -62,7 +62,6 @@ export const WorkoutDetails = () => {
 			hideLoader()
 		}
 	}
-	console.log('data :>> ', data)
 	const handleDeleteComment = async id => {
 		try {
 			await deleteComment(id)
@@ -174,14 +173,14 @@ export const WorkoutDetails = () => {
 									{' '}
 									{/* Задаем xs={12} для полной ширины */}
 									<AudioPlayer
+										autoPlay={false}
 										src={src.value} // Используем значение элемента массива
 										// onPlay={e => console.log(`Playing audio ${src.number}`)} // Используем number для идентификации
 										customAdditionalControls={[]}
-										showSkipControls={false}
+										// showSkipControls={false}
 										showJumpControls={false}
-										customVolumeControls={[]}
-										layout='horizontal-reverse'
-										autoPlay={false}
+										// customVolumeControls={[]}
+										// layout='horizontal-reverse'
 									/>
 								</Grid2>
 							))}
