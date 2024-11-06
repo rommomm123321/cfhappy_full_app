@@ -159,7 +159,7 @@ export const WorkoutCard = ({
 				open={Boolean(anchorEl)}
 				onClose={handleMenuClose}
 			>
-				{!workout.voice_content && (
+				{!workout.voice_content.length && (
 					<MenuItem onClick={handleEdit}>Редагувати</MenuItem>
 				)}
 
